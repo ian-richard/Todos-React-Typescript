@@ -14,10 +14,23 @@ function App() {
     });
   };
 
+  const removeTodoHandler = (todoId: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== todoId);
+    });
+  };
+
+  let content = (
+    <p style={{ textAlign: "center" }}>No todos found. Maybe add one?</p>
+  );
+  if (todos.length > 0) {
+    content = <Todos items={todos} onRemoveTodo={removeTodoHandler}/>;
+  }
   return (
     <div>
       <NewTodo onAddTodo={addTodoHandler} />
-      <Todos items={todos} />
+      {content}
+      
     </div>
   );
 }
